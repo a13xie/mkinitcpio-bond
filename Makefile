@@ -1,16 +1,16 @@
 VERSION	  = $(shell git describe)
-DISTFILES = Makefile nbd_install nbd_hook
+DISTFILES = Makefile bond_install bond_hook
 
 install:
-	install -m 644 -D nbd_install $(DESTDIR)/usr/lib/initcpio/install/nbd
-	install -m 644 -D nbd_hook $(DESTDIR)/usr/lib/initcpio/hooks/nbd
+	install -m 644 -D bond_install $(DESTDIR)/usr/lib/initcpio/install/bond
+	install -m 644 -D bond_hook $(DESTDIR)/usr/lib/initcpio/hooks/bond
 
 uninstall:
-	$(RM) $(DESTDIR)/usr/lib/initcpio/install/nbd
-	$(RM) $(DESTDIR)/usr/lib/initcpio/hooks/nbd
+	$(RM) $(DESTDIR)/usr/lib/initcpio/install/bond
+	$(RM) $(DESTDIR)/usr/lib/initcpio/hooks/bond
 
 dist:
-	mkdir mkinitcpio-nbd-$(VERSION)
-	cp $(DISTFILES) mkinitcpio-nbd-$(VERSION)
-	tar czf mkinitcpio-nbd-$(VERSION).tar.gz mkinitcpio-nbd-$(VERSION)
-	rm -rf mkinitcpio-nbd-$(VERSION)
+	mkdir mkinitcpio-bond-$(VERSION)
+	cp $(DISTFILES) mkinitcpio-bond-$(VERSION)
+	tar czf mkinitcpio-bond-$(VERSION).tar.gz mkinitcpio-bond-$(VERSION)
+	rm -rf mkinitcpio-bond-$(VERSION)

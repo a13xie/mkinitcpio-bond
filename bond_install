@@ -1,0 +1,26 @@
+#!/bin/bash
+
+build() {
+    add_module bonding
+    add_binary bridge
+    add_runscript
+}
+
+help() {
+    cat<<HELPEOF
+This hook allows you to configure network interface bonding.
+The intended use case is to configure bonding before using `nbd` or `nfs`
+for the system root.
+
+Kernel Parameters:
+
+<bond_interfaces> Comma-separated list of interfaces that will be bonded.
+           This parameter is required.
+
+<bond_mode> The mode which the interfaces will use.
+           Available modes are:
+           balance-rr|active-backup|balance-xor|broadcast|802.3ad|balance-tlb|balance-alb
+           (see `ip link add name bond0 type bond --help`)
+	   This parameter is required.
+HELPEOF
+}

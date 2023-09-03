@@ -1,0 +1,22 @@
+#!/usr/bin/ash
+
+run_hook() {
+	msg "bond_interfaces = ${bond_interfaces}"
+	msg "bond_mode" = ${bond_mode}
+
+	if [ -z "${bond_interfaces}" -o -z "${bond_mode}" ]; then
+		err "the bond_interfaces and bond_mode parameters are required, see 'mkinitcpio -H nbd' for details!"
+	else
+		msg "loading module..."
+		modprobe bonding
+		msg "creating bond interface"
+		ip link add name bond0 type bond mode ${bond_mode}
+		for interface in ${bond_interfaces//,/ }
+		do
+			msg "adding ${interface} to bond"
+			ip link set master bond0 dev ${interface}
+		done
+		msg "enabling bonded interface"
+		ip link set up dev bond0
+	fi
+}
